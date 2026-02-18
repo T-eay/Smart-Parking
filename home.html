@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intelligent Campus Smart Parking</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>Smart Parking</h2>
+    <ul>
+        <li onclick="location.href='dashboard.html'">🏠 Dashboard</li>
+        <li onclick="location.href='booking.html'">📱 User Booking</li>
+        <li onclick="logout()">🚪 Logout</li>
+    </ul>
+</div>
+
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+    <div class="topbar">
+        <h1>Admin Dashboard</h1>
+        <input type="text" placeholder="Search...">
+    </div>
+
+    <!-- KPI CARDS -->
+    <div class="cards">
+        <div class="card">
+            <h3>Total Slots</h3>
+            <p id="totalSlots">250</p>
+        </div>
+
+        <div class="card">
+            <h3>Occupied Slots</h3>
+            <p id="occupiedSlots">180</p>
+        </div>
+
+        <div class="card">
+            <h3>Available Slots</h3>
+            <p id="availableSlots">70</p>
+        </div>
+
+        <div class="card">
+            <h3>Revenue Today</h3>
+            <p>$120</p>
+        </div>
+    </div>
+
+    <!-- PARKING TABLE -->
+    <div class="table-container">
+        <h2>Live Parking Status</h2>
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>Zone</th>
+                    <th>Total</th>
+                    <th>Occupied</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="parkingTable">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+
+const zones = [
+    {zone:"P1", total:50, occupied:40},
+    {zone:"P2", total:80, occupied:80},
+    {zone:"P3", total:120, occupied:60}
+];
+
+const table = document.getElementById("parkingTable");
+
+zones.forEach(z=>{
+    let status = z.occupied < z.total ? "Free" : "Full";
+    let statusClass = z.occupied < z.total ? "status-free" : "status-occupied";
+
+    table.innerHTML += `
+        <tr>
+            <td>${z.zone}</td>
+            <td>${z.total}</td>
+            <td>${z.occupied}</td>
+            <td class="${statusClass}">${status}</td>
+        </tr>
+    `;
+});
+
+</script>
+
+
+<script>
+    function goToBooking(){
+        window.location.href = "booking.html";
+    }
+    
+    function logout(){
+        window.location.href = "index.html";
+    }
+    </script>
+    
+
+<button onclick="goToBooking()">📱 Go to Booking Page</button>
+<button onclick="logout()">🚪 Logout</button>
+
+
+
+
+
+
+</body>
+</html>
